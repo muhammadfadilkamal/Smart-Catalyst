@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Siswa - Smart Catalyst</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="Logo.png" alt="Smart Catalyst" class="logo-img">
+            </div>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="program.html" class="nav-link">Program</a></li>
+                <li><a href="promo.html" class="nav-link">Promo</a></li>
+                <li><a href="testimoni.html" class="nav-link">Testimoni</a></li>
+                <li><a href="karir.html" class="nav-link">Karir</a></li>
+                <li><a href="registrasi.html" class="nav-link cta-button">Daftar Sekarang</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" style="padding-top: 80px;">
+        <section class="form-container">
+            <div class="text-center mb-2">
+                <h1 class="section-title">Form Pendaftaran Siswa</h1>
+                <p>Isi form berikut untuk bergabung dengan Smart Catalyst</p>
+            </div>
+
+            <div class="form-card">
+                <!-- Program Selection -->
+                <div class="form-group">
+                    <label class="form-label">Pilih Program *</label>
+                    <select class="form-select" id="programSelect" name="program_daftar" required>
+                        <option value="">Pilih Program...</option>
+                        <!-- Options will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <!-- Auto Select Feedback -->
+                <div id="autoSelectFeedback" class="hidden" style="margin: 1rem 0; padding: 1rem; background: #e8f5e8; border-radius: 5px; border-left: 4px solid var(--primary-green);">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="color: var(--primary-green);">✅</span>
+                        <div>
+                            <strong>Program telah dipilih otomatis:</strong>
+                            <span id="selectedProgramName" style="color: var(--primary-blue);"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Private Student Form -->
+                <div id="privateForm" class="hidden">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; border-bottom: 2px solid var(--light-gray); padding-bottom: 0.5rem;">
+                        Data Siswa (Private)
+                    </h3>
+                    
+                    <form id="privateRegistrationForm">
+                        <div class="form-group">
+                            <label class="form-label">Nama Lengkap Siswa *</label>
+                            <input type="text" class="form-input" name="nama_siswa" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Jenis Kelamin *</label>
+                            <select class="form-select" name="jenis_kelamin" required>
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Alamat Lengkap *</label>
+                            <textarea class="form-textarea" name="alamat" required></textarea>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Tempat Lahir *</label>
+                                <input type="text" class="form-input" name="tempat_lahir" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Tanggal Lahir *</label>
+                                <input type="date" class="form-input" name="tanggal_lahir" required>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Jenjang Pendidikan *</label>
+                                <select class="form-select" name="jenjang" id="jenjang" required>
+                                    <option value="">Pilih Jenjang</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Kelas *</label>
+                                <select class="form-select" name="kelas" id="kelas" required>
+                                    <option value="">Pilih Kelas</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--primary-green); margin: 2rem 0 1rem 0;">Data Orang Tua</h4>
+
+                        <div class="form-group">
+                            <label class="form-label">Nama Orang Tua *</label>
+                            <input type="text" class="form-input" name="nama_ortu" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Nomor HP Orang Tua *</label>
+                                <input type="tel" class="form-input" name="no_hp_ortu" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Pekerjaan Orang Tua</label>
+                                <input type="text" class="form-input" name="pekerjaan_ortu">
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--primary-orange); margin: 2rem 0 1rem 0;">Jadwal Belajar</h4>
+
+                        <div class="form-group">
+                            <label class="form-label">Hari Belajar *</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Senin"> Senin
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Selasa"> Selasa
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Rabu"> Rabu
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Kamis"> Kamis
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Jumat"> Jumat
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Sabtu"> Sabtu
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Minggu"> Minggu
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Jam Belajar *</label>
+                            
+                            <select class="form-select" id="jadwal_jam_select" name="jadwal_jam_select" onchange="handleSimpleJamSelection(this)">
+                                <option value="">Pilih Jam</option>
+                                <option value="08:00-09:30">08:00 - 09:30</option>
+                                <option value="10:00-11:30">10:00 - 11:30</option>
+                                <option value="13:00-14:30">13:00 - 14:30</option>
+                                <option value="15:00-16:30">15:00 - 16:30</option>
+                                <option value="17:00-18:30">17:00 - 18:30</option>
+                                <option value="19:00-20:30">19:00 - 20:30</option>
+                                <option value="other">Lainnya (tulis di catatan)</option>
+                            </select>
+                            
+                            <div id="jam_catatan_container" style="display: none; margin-top: 1rem;">
+                                <label class="form-label">Catatan Jam Khusus</label>
+                                <input type="text" id="jam_catatan" name="jam_catatan" class="form-input" 
+                                       placeholder="Contoh: Fleksible, Weekend saja, dll.">
+                            </div>
+                            
+                            <input type="hidden" id="jadwal_jam" name="jadwal_jam" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success btn-block">
+                            Submit Pendaftaran
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Group Registration Form -->
+                <div id="groupForm" class="hidden">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; border-bottom: 2px solid var(--light-gray); padding-bottom: 0.5rem;">
+                        Data Kelompok Belajar
+                    </h3>
+                    
+                    <form id="groupRegistrationForm">
+                        <div class="form-group">
+                            <label class="form-label">Nama Perwakilan *</label>
+                            <input type="text" class="form-input" name="nama_perwakilan" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Asal Sekolah *</label>
+                            <input type="text" class="form-input" name="asal_sekolah" required>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Jenjang *</label>
+                                <select class="form-select" name="jenjang" required>
+                                    <option value="">Pilih Jenjang</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA">SMA</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Kelas *</label>
+                                <select class="form-select" name="kelas" required>
+                                    <option value="">Pilih Kelas</option>
+                                    <option value="1">Kelas 1</option>
+                                    <option value="2">Kelas 2</option>
+                                    <option value="3">Kelas 3</option>
+                                    <option value="4">Kelas 4</option>
+                                    <option value="5">Kelas 5</option>
+                                    <option value="6">Kelas 6</option>
+                                    <option value="7">Kelas 7</option>
+                                    <option value="8">Kelas 8</option>
+                                    <option value="9">Kelas 9</option>
+                                    <option value="10">Kelas 10</option>
+                                    <option value="11">Kelas 11</option>
+                                    <option value="12">Kelas 12</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Jumlah Siswa *</label>
+                                <input type="number" class="form-input" name="jumlah_siswa" min="2" max="20" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Nomor HP Perwakilan *</label>
+                                <input type="tel" class="form-input" name="no_hp_perwakilan" required>
+                            </div>
+                        </div>
+
+                        <h4 style="color: var(--primary-orange); margin: 2rem 0 1rem 0;">Jadwal Belajar</h4>
+
+                        <div class="form-group">
+                            <label class="form-label">Hari Belajar *</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Senin"> Senin
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Selasa"> Selasa
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Rabu"> Rabu
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Kamis"> Kamis
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Jumat"> Jumat
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Sabtu"> Sabtu
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="jadwal_hari" value="Minggu"> Minggu
+                                </label>
+                            </div>
+                        </div>
+
+                <div class="form-group">
+             <label class="form-label">Jam Belajar *</label>
+         <select class="form-select" id="jadwal_jam_select" name="jadwal_jam_select" onchange="handleSimpleJamSelection(this)">
+              <option value="">Pilih Jam</option>
+              <option value="08:00-09:30">08:00 - 09:30</option>
+              <option value="10:00-11:30">10:00 - 11:30</option>
+              <option value="13:00-14:30">13:00 - 14:30</option>
+              <option value="15:00-16:30">15:00 - 16:30</option>
+              <option value="17:00-18:30">17:00 - 18:30</option>
+              <option value="19:00-20:30">19:00 - 20:30</option>
+              <option value="other">Lainnya (tulis di catatan)</option>
+        </select>
+         <div id="jam_catatan_container" style="display: none; margin-top: 1rem;">
+            <label class="form-label">Catatan Jam Khusus</label>
+            <input type="text" id="jam_catatan" name="jam_catatan" class="form-input" 
+               placeholder="Contoh: Fleksible, Weekend saja, dll.">
+              </div>
+                <input type="hidden" id="jadwal_jam" name="jadwal_jam" required>
+                    </div>
+                        <button type="submit" class="btn btn-success btn-block">
+                            Submit Pendaftaran Group
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Initial State Message -->
+                <div id="initialMessage" class="text-center">
+                    <p style="color: #666; font-style: italic;">
+                        Silakan pilih program terlebih dahulu untuk menampilkan form pendaftaran yang sesuai.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Smart Catalyst</h3>
+                <p>Lembaga bimbingan belajar profesional dengan pengajar berkualitas dan metode pembelajaran yang menyenangkan.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak Kami</h3>
+                <div class="contact-item">
+                    <img src="LOGO_WA.png" alt="WhatsApp" class="contact-logo">
+                    <a href="https://wa.me/6285180649460" target="_blank" class="contact-link">
+                        WhatsApp
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <img src="LOGO_IG.png" alt="Instagram" class="contact-logo">
+                    <a href="https://instagram.com/smart_catalyst.psw" target="_blank" class="contact-link">
+                        Instagram
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <img src="LOGO_EMAIL.png" alt="Email" class="contact-logo">
+                    <a href="mailto:muhammadfadilkamal@gmail.com" class="contact-link">
+                        Email
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <img src="LOGO_GMAPS.png" alt="Email" class="contact-logo">
+                    <span class="contact-text">Pringsewu Selatan, Pringsewu, Lampung</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Link Cepat</h3>
+                <p><a href="program.html">Program Belajar</a></p>
+                <p><a href="promo.html">Promo Terbaru</a></p>
+                <p><a href="testimoni.html">Testimoni</a></p>
+                <p><a href="registrasi.html">Pendaftaran</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Smart Catalyst. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

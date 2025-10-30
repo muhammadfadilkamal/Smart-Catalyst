@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Tutor - Smart Catalyst</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-to-content">Skip to main content</a>
+    
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <img src="Logo.png" alt="Smart Catalyst" class="logo-img">
+            </div>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                ☰
+            </button>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="program.html" class="nav-link">Program</a></li>
+                <li><a href="promo.html" class="nav-link">Promo</a></li>
+                <li><a href="testimoni.html" class="nav-link">Testimoni</a></li>
+                <li><a href="karir.html" class="nav-link active">Karir</a></li>
+                <li><a href="registrasi.html" class="nav-link cta-button">Daftar Sekarang</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content" style="padding-top: 0px;">
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Bergabung sebagai Tutor Smart Catalyst</h1>
+                <p class="hero-subtitle">Isi formulir berikut untuk melamar menjadi bagian dari tim pengajar profesional kami</p>
+            </div>
+        </section>
+
+        <section class="form-container">
+            <div class="form-card">
+                <div id="autoSelectFeedback" class="hidden" style="background: #e8f5e8; padding: 1rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid var(--primary-teal);">
+                    <h3 style="color: var(--primary-teal); margin-bottom: 0.5rem;">🎯 Melamar untuk: <span id="selectedKarirName"></span></h3>
+                    <p style="color: var(--medium-gray); margin: 0;">Formulir telah disesuaikan dengan lowongan yang Anda pilih</p>
+                </div>
+                
+                <!-- Existing Tutor Message -->
+                <div id="existingTutorMessage" style="display: none;"></div>
+                
+                <!-- Progress Indicator -->
+                <div id="uploadProgress" style="display: none; background: #e8f5e8; padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; text-align: center;">
+                    <div class="spinner" style="width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 1rem;"></div>
+                    <p style="font-weight: bold; color: var(--primary-blue); margin-bottom: 0.5rem;">🔄 Mengirim lamaran...</p>
+                    <small style="color: var(--medium-gray);">Proses mungkin memakan waktu beberapa detik</small>
+                </div>
+
+                <!-- Panduan Upload -->
+                <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 1.5rem; border-radius: 10px; margin-bottom: 2rem; border-left: 4px solid var(--primary-blue);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: 1rem;">📁 Panduan Upload File</h3>
+                    <ol style="color: var(--dark-gray); margin: 0; padding-left: 1.2rem;">
+                        <li>Upload file ke <strong>Google Drive</strong> Anda</li>
+                        <li>Klik kanan file → <strong>"Get link"</strong></li>
+                        <li>Setel sharing ke <strong>"Anyone with the link can view"</strong></li>
+                        <li>Copy dan paste link di form bawah</li>
+                    </ol>
+                    <div style="margin-top: 1rem; padding: 1rem; background: white; border-radius: 5px;">
+                        <strong>Format Link:</strong> 
+                        <code style="background: #f5f5f5; padding: 0.2rem 0.5rem; border-radius: 3px; font-size: 0.9rem;">
+                            https://drive.google.com/file/d/1ABC123.../view
+                        </code>
+                    </div>
+                </div>
+
+                <form id="tutorRegistrationForm">
+                    <!-- Data Pribadi -->
+                    <div class="form-section">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-gray);">📝 Data Pribadi</h3>
+                        
+                        <div class="form-group">
+                            <label for="nama_lengkap" class="form-label">Nama Lengkap (beri gelar jika ada) *</label>
+                            <input type="text" id="nama_lengkap" name="nama_lengkap" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin *</label>
+                            <select id="jenis_kelamin" name="jenis_kelamin" class="form-select" required>
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tanggal_lahir" class="form-label">Tanggal Lahir *</label>
+                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="alamat_domisili" class="form-label">Alamat Domisili Lengkap *</label>
+                            <textarea id="alamat_domisili" name="alamat_domisili" class="form-textarea" required placeholder="Alamat lengkap tempat tinggal saat ini"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="no_hp" class="form-label">Nomor HP (Aktif WhatsApp) *</label>
+                            <input type="tel" id="no_hp" name="no_hp" class="form-input" required placeholder="Contoh: 081234567890">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="link_media_sosial" class="form-label">Link Media Sosial (Instagram/LinkedIn)</label>
+                            <input type="url" id="link_media_sosial" name="link_media_sosial" class="form-input" placeholder="Contoh: https://linkedin.com/in/nama-anda">
+                        </div>
+
+                        <!-- Input Link Google Drive untuk Foto -->
+                        <div class="form-group">
+                            <label for="foto_url" class="form-label">Link Foto Profil (Google Drive)</label>
+                            <input type="url" id="foto_url" name="foto_url" class="form-input" 
+                                   placeholder="Opsional untuk tutor existing - https://drive.google.com/file/d/.../view"
+                                   onchange="validateGoogleDriveLink(this, 'foto')">
+                            <div id="foto_status" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                            <small style="color: var(--medium-gray);">
+                                📷 Kosongkan jika tidak ingin mengganti foto
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Data Pendidikan -->
+                    <div class="form-section">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-gray);">🎓 Data Pendidikan</h3>
+                        
+                        <div class="form-group">
+                            <label for="pendidikan_terakhir" class="form-label">Pendidikan Terakhir *</label>
+                            <select id="pendidikan_terakhir" name="pendidikan_terakhir" class="form-select" required>
+                                <option value="">Pilih Pendidikan Terakhir</option>
+                                <option value="SMA/Sederajat">SMA/Sederajat</option>
+                                <option value="D1">D1</option>
+                                <option value="D2">D2</option>
+                                <option value="D3">D3</option>
+                                <option value="D4">D4</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="instansi_pendidikan" class="form-label">Nama Instansi Pendidikan *</label>
+                            <input type="text" id="instansi_pendidikan" name="instansi_pendidikan" class="form-input" required placeholder="Nama universitas/instansi pendidikan">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="jurusan" class="form-label">Jurusan *</label>
+                            <input type="text" id="jurusan" name="jurusan" class="form-input" required placeholder="Contoh: Matematika, Fisika, Bahasa Inggris">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ipk" class="form-label">IPK/Nilai Akhir *</label>
+                            <input type="number" id="ipk" name="ipk" class="form-input" step="0.01" min="0" max="4" required placeholder="Contoh: 3.75">
+                            <small style="color: var(--medium-gray);">Jika SMA, isi dengan nilai rata-rata rapor</small>
+                        </div>
+                    </div>
+
+                    <!-- Status & Pengalaman -->
+                    <div class="form-section">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-gray);">💼 Status & Pengalaman</h3>
+                        
+                        <div class="form-group">
+                            <label for="status_sekarang" class="form-label">Status Saat Ini *</label>
+                            <select id="status_sekarang" name="status_sekarang" class="form-select" required>
+                                <option value="">Pilih Status</option>
+                                <option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
+                                <option value="Bekerja Full Time">Bekerja Full Time</option>
+                                <option value="Bekerja Part Time">Bekerja Part Time</option>
+                                <option value="Freelancer">Freelancer</option>
+                                <option value="Fresh Graduate">Fresh Graduate</option>
+                                <option value="Professional">Professional</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pengalaman_mengajar" class="form-label">Pengalaman Mengajar *</label>
+                            <textarea id="pengalaman_mengajar" name="pengalaman_mengajar" class="form-textarea" required 
+                                      placeholder="Jelaskan pengalaman mengajar Anda sebelumnya:
+- Lama pengalaman
+- Jenjang yang diajarkan  
+- Mata pelajaran
+- Prestasi (jika ada)"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Jenjang yang Bisa Diajarkan *</label>
+                            <div class="checkbox-group" style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                                <label class="checkbox-label" style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="jenjang_diajarkan" value="SD"> SD
+                                </label>
+                                <label class="checkbox-label" style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="jenjang_diajarkan" value="SMP"> SMP
+                                </label>
+                                <label class="checkbox-label" style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <input type="checkbox" name="jenjang_diajarkan" value="SMA"> SMA
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ketersediaan Mengajar -->
+                    <div class="form-section">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-gray);">🕒 Ketersediaan Mengajar</h3>
+                        
+                        <div class="form-group">
+                            <label for="kesediaan_mengajar" class="form-label">Kesediaan Mengajar *</label>
+                            <select id="kesediaan_mengajar" name="kesediaan_mengajar" class="form-select" required>
+                                <option value="">Pilih Kesediaan</option>
+                                <option value="Part-Time">Part-Time (sambilan)</option>
+                                <option value="Full-Time">Full-Time (penuh waktu)</option>
+                                <option value="Freelance">Freelance (per project)</option>
+                                <option value="Magang">Magang</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area_mengajar" class="form-label">Area Mengajar *</label>
+                            <textarea id="area_mengajar" name="area_mengajar" class="form-textarea" required 
+                                      placeholder="Sebutkan area/kecamatan yang bisa Anda jangkau untuk mengajar. Contoh:
+- Pringsewu Selatan
+- Pringsewu Utara  
+- Pringsewu Barat
+- Adiluwih
+- dll."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Dokumen Pendukung -->
+                    <div class="form-section">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-gray);">📎 Dokumen Pendukung</h3>
+                        
+                        <div id="documentsNotice" style="background: #fff3cd; padding: 1rem; border-radius: 5px; margin-bottom: 1rem; display: none;">
+                            <p>📝 <strong>Untuk tutor yang sudah terdaftar:</strong> Dokumen menggunakan yang sudah ada di sistem. Isi link hanya jika ingin update dokumen.</p>
+                        </div>
+                        
+                        <!-- Input Link Google Drive untuk CV -->
+                        <div class="form-group">
+                            <label for="cv_url" class="form-label">Link Curriculum Vitae (CV) - Google Drive</label>
+                            <input type="url" id="cv_url" name="cv_url" class="form-input" 
+                                   placeholder="Opsional untuk tutor existing - https://drive.google.com/file/d/.../view"
+                                   onchange="validateGoogleDriveLink(this, 'cv')">
+                            <div id="cv_status" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                            <small style="color: var(--medium-gray);">
+                                📄 Kosongkan jika tidak ingin mengganti CV
+                            </small>
+                        </div>
+
+                        <!-- Input Link Google Drive untuk Kesepakatan Kerja -->
+                        <div class="form-group">
+                            <label for="kesepakatan_kerja_url" class="form-label">Link Form Kesepakatan Kerja - Google Drive</label>
+                            <input type="url" id="kesepakatan_kerja_url" name="kesepakatan_kerja_url" class="form-input" 
+                                   placeholder="Opsional untuk tutor existing - https://drive.google.com/file/d/.../view"
+                                   onchange="validateGoogleDriveLink(this, 'kerja')">
+                            <div id="kerja_status" style="margin-top: 0.5rem; font-size: 0.9rem;"></div>
+                            <small style="color: var(--medium-gray);">
+                                📝 Kosongkan jika tidak ingin mengganti form kesepakatan kerja
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Pernyataan -->
+                    <div class="form-section">
+                        <h3 style="color: var(--primary-blue); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--light-gray);">✅ Pernyataan & Persetujuan</h3>
+                        
+                        <div class="form-group">
+                            <label class="checkbox-label" style="display: flex; align-items: flex-start; gap: 0.5rem;">
+                                <input type="checkbox" name="pernyataan_kebenaran" value="Ya" required style="margin-top: 0.25rem;">
+                                <span>
+                                    Saya dengan ini menyatakan bahwa semua data dan informasi yang saya berikan dalam formulir pendaftaran ini adalah BENAR dan SAH. 
+                                    Saya bersedia untuk bertanggung jawab secara hukum apabila di kemudian hari ditemukan ketidaksesuaian dalam data yang saya berikan. *
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="display: flex; gap: 1rem; justify-content: center;">
+                        <a href="karir.html" class="btn btn-outline" style="padding: 1rem 2rem; text-decoration: none;">
+                            ← Kembali
+                        </a>
+                        <button type="submit" class="btn btn-success" style="padding: 1rem 2rem; font-size: 1.1rem;">
+                            📨 Kirim Lamaran
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Smart Catalyst</h3>
+                <p>Lembaga bimbingan belajar profesional dengan pengajar berkualitas dan metode pembelajaran yang menyenangkan.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak Kami</h3>
+                <div class="contact-item">
+                    <img src="LOGO_WA.png" alt="WhatsApp" class="contact-logo">
+                    <a href="https://wa.me/6285180649460" target="_blank" class="contact-link">
+                        WhatsApp
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <img src="LOGO_IG.png" alt="Instagram" class="contact-logo">
+                    <a href="https://instagram.com/smart_catalyst.psw" target="_blank" class="contact-link">
+                        Instagram
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <img src="LOGO_EMAIL.png" alt="Email" class="contact-logo">
+                    <a href="mailto:muhammadfadilkamal@gmail.com" class="contact-link">
+                        Email
+                    </a>
+                </div>
+                <div class="contact-item">
+                    <img src="LOGO_GMAPS.png" alt="Email" class="contact-logo">
+                    <span class="contact-text">Pringsewu Selatan, Pringsewu, Lampung</span>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Link Cepat</h3>
+                <p><a href="program.html">Program Belajar</a></p>
+                <p><a href="promo.html">Promo Terbaru</a></p>
+                <p><a href="testimoni.html">Testimoni</a></p>
+                <p><a href="registrasi.html">Pendaftaran</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Smart Catalyst. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 Initializing tutor registration form...');
+        initializeTutorForm();
+        autoSelectKarirInForm();
+    });
+    </script>
+</body>
+</html>
